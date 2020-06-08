@@ -75,10 +75,15 @@ class Create {
   }
 }
 
+const div = new Create('div', {
+  class: 'button-container',
+  style: 'background:coral; padding:20px; width: 100px',
+});
+div.placeElement('body', 'afterbegin');
 const button = new Create('button', {
-  class: 'classname',
-  style: 'background:coral',
+  class: 'button',
+  style: 'background:white; font-family: sans-serif; border: 1px solid black;',
 });
 button.content = 'push the button';
 button.element();
-button.placeElement('body', 'afterbegin');
+button.placeElement('.button-container', 'afterbegin');
