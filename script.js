@@ -56,22 +56,21 @@ class Create {
       }
     }
 
-    const element = `<${this.tagName} ${attr ? attr : null}>${
+    return `<${this.tagName} ${attr ? attr : null}>${
       this.content ? this.content : '\0'
     }</${this.tagName}>`;
-
-    return element;
   }
 
   placeElement(parent, plcmt) {
-    this.parent = parent;
-    this.placement = plcmt;
-    this.parent = document.querySelector(parent);
-    const placedElement = this.parent.insertAdjacentHTML(
-      `${this.placement}`,
-      this.element()
-    );
-    return placedElement;
+    if (parent) {
+      this.parent = parent;
+    }
+    if (plcmt) {
+      this.placement = plcmt;
+    }
+    return document
+      .querySelector(this.parent)
+      .insertAdjacentHTML(`${this.placement}`, this.element());
   }
 }
 
@@ -85,5 +84,4 @@ const button = new Create('button', {
   style: 'background:white; font-family: sans-serif; border: 1px solid black;',
 });
 button.content = 'push the button';
-button.element();
 button.placeElement('.button-container', 'afterbegin');
